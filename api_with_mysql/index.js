@@ -137,7 +137,11 @@ app.get('/list',authenticationToken,async(req,res)=>{
     //execute select query to get data
     try{
         const [rows]=await pool.execute('SELECT id,name,email,adhar_card_number FROM users');
-        res.json({rows});
+        const [rows1] = await pool.execute('SELECT * FROM images');
+        res.json({userdata:rows,images:rows1});
+
+        
+        
     }
     catch(err){
         res.status(500).json({error:'Internal Server Error'});
